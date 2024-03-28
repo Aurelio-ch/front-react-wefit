@@ -40,7 +40,7 @@ export const CarLink = styled(Link)`
 
     span {
       font-size: 0.75rem;
-      color: ${({ theme }) => theme['grey-500']};
+      color: ${(props) => props.theme['grey-500']};
     }
   }
 

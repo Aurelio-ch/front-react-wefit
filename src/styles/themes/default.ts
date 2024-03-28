@@ -11,5 +11,9 @@ export const defaultTheme = {
   'grey-500': '#999999',
   'grey-200': '#D9D9D9',
 
-  'border-radius': '4px',
+  placeholder: '#cccccc',
+
+  'border-sm': '4px',
+  'border-md': '6px',
+  'border-lg': '8px',
 } as const

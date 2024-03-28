@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     color: ${(props) => props.theme.white};
     -webkit-font-smoothing: antialiased;
   }
-  body, input-security, textarea, button {
+  body, input, textarea, button, select {
     font-family: 'Open Sans', sans-serif;
   }
 
@@ -34,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
     border: 0;
     outline: none;
     cursor: pointer;
-    color: ${({ theme }) => theme.white};
+    color: ${(props) => props.theme.white};
 
     transition: all ease-in-out 0.3s;
 
