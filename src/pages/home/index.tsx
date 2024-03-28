@@ -1,9 +1,20 @@
+import { ProductCard } from '@/components/card'
 import { SearchForm } from '@/components/search-form'
+import { Container, ProductContainer } from './styles'
 
 export function Home() {
   return (
-    <div>
+    <Container>
       <SearchForm />
-    </div>
+
+      <ProductContainer>
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+      </ProductContainer>
+    </Container>
   )
 }
