@@ -8,7 +8,7 @@ export function Header() {
         <h1>WeMovies</h1>
       </Link>
 
-      <CarLink to="/">
+      <CarLink to="/cart">
         <div>
           <p>Meu Carrrinho</p>
           <span>0 itens</span>
