@@ -2,15 +2,26 @@ import { MdOutlineAddShoppingCart } from 'react-icons/md'
 import { Button } from '../button'
 import { Container } from './styles'
 
-export function ProductCard() {
+interface ProductProps {
+  product: {
+    id: number
+    title: string
+    price: number
+    image: string
+  }
+}
+
+export function ProductCard({ product }: ProductProps) {
   return (
     <Container>
-      <img
-        src="https://wefit-react-web-test.s3.amazonaws.com/viuva-negra.png"
-        alt=""
-      />
-      <p>Viúva Negra</p>
-      <span>R$ 9,99</span>
+      <img src={product.image} alt="" />
+      <p>{product.title}</p>
+      <span>
+        {product.price.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        })}
+      </span>
       <Button.Container>
         <Button.Prefix>
           <MdOutlineAddShoppingCart size={15} /> 0
