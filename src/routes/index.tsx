@@ -1,6 +1,6 @@
 import { AppLayout } from '@/layouts/app'
 import { Cart } from '@/pages/cart'
-import { CartSuccess } from '@/pages/cart/sucess'
+import { CartSuccess } from '@/pages/cart/success'
 import { Home } from '@/pages/home'
 import Search from '@/pages/search'
 import { createBrowserRouter } from 'react-router-dom'
