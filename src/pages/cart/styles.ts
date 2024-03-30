@@ -101,3 +101,20 @@ export const Divisor = styled.div`
   width: 100%;
   background-color: ${(props) => props.theme['grey-500']};
 `
+
+export const EmptyCart = styled.p`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  color: ${(props) => props.theme['blue-900']};
+  font-size: 1rem;
+  font-weight: bold;
+
+  padding: 2rem;
+
+  max-width: 1000px;
+  width: 100%;
+`

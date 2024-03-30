@@ -7,6 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   gap: 2rem;
   grid-column: span 3;
+  text-align: center;
 
   background-color: ${(props) => props.theme.white};
   padding: 4rem;

@@ -7,6 +7,8 @@ export const Container = styled.div`
   justify-content: center;
   gap: 2rem;
 
+  text-align: center;
+
   margin: 0 1rem;
   background-color: ${(props) => props.theme.white};
   padding: 4rem;
