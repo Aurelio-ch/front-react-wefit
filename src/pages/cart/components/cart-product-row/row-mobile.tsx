@@ -1,38 +1,76 @@
+import { useCart } from '@/context/cart-context'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 import { IoMdTrash } from 'react-icons/io'
 import { PiMinusCircleBold, PiPlusCircleBold } from 'react-icons/pi'
+import { CardProps } from '.'
+import { QuantitySchema, quantitySchema } from './row-default'
 import { ProductInfo, ProductQtdAndSubtotal, ProductRowMobile } from './styles'
 
-export function RowMobile() {
+export function RowMobile({ itemCart }: CardProps) {
+  const { decreaseQuantity, increaseQuantity, removeProduct } = useCart()
+  const { register } = useForm<QuantitySchema>({
+    resolver: zodResolver(quantitySchema),
+  })
+
+  function handleToDecrease(id: number) {
+    decreaseQuantity(id)
+  }
+
+  function handleToIncrease(id: number) {
+    increaseQuantity(id)
+  }
+
+  function handleRemoveProduct(id: number) {
+    removeProduct(id)
+  }
+
   return (
     <>
       <ProductRowMobile>
-        <img
-          src="https://wefit-react-web-test.s3.amazonaws.com/spider-man.png"
-          alt=""
-        />
-        <div>
+        <img src={itemCart.image} alt="" />
+        <div className="box-product-info">
           <ProductInfo>
-            <p>Homem Aranha</p>
-            <span>R$ 29,99</span>
-            <button>
+            <p>{itemCart.title}</p>
+            <span>
+              {itemCart.price.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </span>
+            <button onClick={() => handleRemoveProduct(itemCart.id)}>
               <IoMdTrash size={24} />
             </button>
           </ProductInfo>
 
           <ProductQtdAndSubtotal>
             <div>
-              <button>
+              <button
+                disabled={itemCart.quantity === 1}
+                onClick={() => handleToDecrease(itemCart.id)}
+              >
                 <PiMinusCircleBold size={18} />
               </button>
-              <input type="number" />
-              <button>
+              <form>
+                <input
+                  type="number"
+                  {...register('quantity')}
+                  value={itemCart.quantity}
+                />
+              </form>
+              <button onClick={() => handleToIncrease(itemCart.id)}>
                 <PiPlusCircleBold size={18} />
               </button>
             </div>
 
             <div>
               <strong>SUBTOTAL</strong>
-              <span>R$ 29,99</span>
+              <span>
+                {itemCart.subtotal.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
+              </span>
             </div>
           </ProductQtdAndSubtotal>
         </div>

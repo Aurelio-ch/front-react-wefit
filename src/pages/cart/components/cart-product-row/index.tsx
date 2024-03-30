@@ -1,11 +1,16 @@
+import { CartItem } from '@/context/cart-context'
 import { RowDefault } from './row-default'
 import { RowMobile } from './row-mobile'
 
-export function CartProductRow() {
+export interface CardProps {
+  itemCart: CartItem
+}
+
+export function CartProductRow({ itemCart }: CardProps) {
   return (
     <>
-      <RowDefault />
-      <RowMobile />
+      <RowDefault itemCart={itemCart} />
+      <RowMobile itemCart={itemCart} />
     </>
   )
 }

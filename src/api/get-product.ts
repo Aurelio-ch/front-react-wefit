@@ -1,6 +1,6 @@
 import { api } from '@/lib/axios'
 
-export interface GetProductResponse {
+export interface Product {
   id: number
   title: string
   price: number
@@ -8,7 +8,7 @@ export interface GetProductResponse {
 }
 
 export async function getProduct() {
-  const response = await api.get<GetProductResponse[]>('/products')
+  const response = await api.get<Product[]>('/products')
 
   return response.data
 }

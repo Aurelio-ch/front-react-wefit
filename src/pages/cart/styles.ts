@@ -82,6 +82,18 @@ export const FooterCart = styled.div`
       color: ${(props) => props.theme['blue-900']};
     }
   }
+
+  @media (max-width: 430px) {
+    flex-direction: column-reverse;
+    gap: 1rem;
+    div {
+      justify-content: space-between;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
 `
 
 export const Divisor = styled.div`

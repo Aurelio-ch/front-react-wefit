@@ -1,9 +1,14 @@
 import { Button } from '@/components/button'
+import { useCart } from '@/context/cart-context'
 import { Link } from 'react-router-dom'
 import { CartProductRow } from './components/cart-product-row'
 import { Container, Divisor, FooterCart, Thead } from './styles'
 
 export function Cart() {
+  const { items, finalizeOrder } = useCart()
+  const totalCart = items.reduce((soma, { subtotal }) => {
+    return soma + subtotal
+  }, 0)
   return (
     <Container>
       <table>
@@ -17,9 +22,9 @@ export function Cart() {
         </Thead>
 
         <tbody>
-          <CartProductRow />
-          <CartProductRow />
-          <CartProductRow />
+          {items.map((item) => {
+            return <CartProductRow key={item.id} itemCart={item} />
+          })}
         </tbody>
       </table>
 
@@ -27,12 +32,19 @@ export function Cart() {
 
       <FooterCart>
         <Link to="/cart/success">
-          <Button.Container>FINALIZAR PEDIDO</Button.Container>
+          <Button.Container onClick={finalizeOrder}>
+            FINALIZAR PEDIDO
+          </Button.Container>
         </Link>
 
         <div>
           <strong>TOTAL</strong>
-          <span>R$ 29,90</span>
+          <span>
+            {totalCart.toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+          </span>
         </div>
       </FooterCart>
     </Container>

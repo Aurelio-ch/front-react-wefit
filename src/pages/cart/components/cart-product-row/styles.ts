@@ -83,6 +83,20 @@ export const ProductRowMobile = styled.div`
     display: flex;
     gap: 1rem;
   }
+
+  .box-product-info {
+    width: 100%;
+
+    div {
+      &:first-child {
+        justify-content: space-between;
+        align-items: center;
+        p {
+          width: 102px;
+        }
+      }
+    }
+  }
 `
 export const ProductInfo = styled.div`
   display: flex;

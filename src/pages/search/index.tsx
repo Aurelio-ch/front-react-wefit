@@ -1,4 +1,4 @@
-import { GetProductResponse } from '@/api/get-product'
+import { Product } from '@/api/get-product'
 import { ProductCard } from '@/components/card'
 import { EmptySate } from '@/components/empty-state'
 import { SearchForm } from '@/components/search-form'
@@ -11,12 +11,11 @@ import { Container, ProductContainer } from './styles'
 export default function Search() {
   const [searchParams] = useSearchParams()
   const query = searchParams.get('query')
-  console.log(query)
 
   const { data, isLoading } = useQuery({
     queryKey: ['search-product', query],
     queryFn: async () => {
-      const { data } = await api.get<GetProductResponse[]>(`/products`)
+      const { data } = await api.get<Product[]>(`/products`)
 
       if (query && query !== null) {
         const queryFormatted = query
@@ -39,8 +38,6 @@ export default function Search() {
       return data
     },
   })
-
-  console.log(data)
 
   return (
     <Container>
