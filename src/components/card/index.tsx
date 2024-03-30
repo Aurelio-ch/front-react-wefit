@@ -22,7 +22,11 @@ export function ProductCard({ product }: ProductProps) {
   }
 
   return (
-    <Container>
+    <Container
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ delay: 0.3 }}
+    >
       <img src={product.image} alt="" />
       <p>{product.title}</p>
       <span>

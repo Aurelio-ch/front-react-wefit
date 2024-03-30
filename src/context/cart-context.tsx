@@ -1,5 +1,6 @@
 import { Product } from '@/api/get-product'
 import { ReactNode, createContext, useContext, useState } from 'react'
+import { toast } from 'sonner'
 
 export interface CartItem {
   id: number
@@ -33,6 +34,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (productInCart) {
         return state.map((item) => {
           if (item.id === product.id) {
+            toast.success(`Você adicionou mais um item de ${item.title}.`, {
+              description: `numero de itens: ${item.quantity + 1}.`,
+            })
             return {
               ...item,
               quantity: item.quantity + 1,
@@ -51,6 +55,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           image: product.image,
           quantity: 1,
         }
+        toast.success(`Você adicionou ${product.title} ao seu carrinho.`)
         return [...state, newProduct]
       }
     })
@@ -101,7 +106,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   function removeProduct(id: number) {
     const newAllProducts = cartItems.filter((item) => item.id !== id)
+    const productRemoved = cartItems.filter((item) => item.id === id)
     setCartItems(newAllProducts)
+    toast.success(`Você removeu ${productRemoved[0].title} do seu carrinho.`)
   }
 
   function finalizeOrder() {

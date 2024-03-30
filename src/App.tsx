@@ -6,6 +6,7 @@ import { queryClient } from './lib/react-query'
 import { router } from './routes'
 import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
+import Toast from './components/toast'
 
 export function App() {
   return (
@@ -13,6 +14,7 @@ export function App() {
       <QueryClientProvider client={queryClient}>
         <CartProvider>
           <GlobalStyle />
+          <Toast />
           <RouterProvider router={router} />
         </CartProvider>
       </QueryClientProvider>

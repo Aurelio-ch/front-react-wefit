@@ -1,14 +1,17 @@
 import { Button } from '@/components/button'
 import { useCart } from '@/context/cart-context'
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { CartProductRow } from './components/cart-product-row'
 import { Container, Divisor, FooterCart, Thead } from './styles'
 
 export function Cart() {
   const { items, finalizeOrder } = useCart()
-  const totalCart = items.reduce((soma, { subtotal }) => {
-    return soma + subtotal
-  }, 0)
+
+  const totalCart = useMemo(() => {
+    return items.reduce((soma, { subtotal }) => soma + subtotal, 0)
+  }, [items])
+
   return (
     <Container>
       <table>
