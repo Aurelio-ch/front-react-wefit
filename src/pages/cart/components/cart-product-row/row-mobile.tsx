@@ -1,5 +1,6 @@
 import { useCart } from '@/context/cart-context'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoMdTrash } from 'react-icons/io'
 import { PiMinusCircleBold, PiPlusCircleBold } from 'react-icons/pi'
@@ -8,10 +9,19 @@ import { QuantitySchema, quantitySchema } from './row-default'
 import { ProductInfo, ProductQtdAndSubtotal, ProductRowMobile } from './styles'
 
 export function RowMobile({ itemCart }: CardProps) {
-  const { decreaseQuantity, increaseQuantity, removeProduct } = useCart()
-  const { register } = useForm<QuantitySchema>({
+  const [inputManualValue, setInputManualValue] = useState(0)
+  const { decreaseQuantity, increaseQuantity, removeProduct, updateQuantity } =
+    useCart()
+  const { register, setValue, handleSubmit } = useForm<QuantitySchema>({
     resolver: zodResolver(quantitySchema),
   })
+
+  useEffect(() => {
+    setValue(
+      'quantity',
+      inputManualValue <= 0 ? itemCart.quantity : inputManualValue,
+    )
+  }, [itemCart.quantity, setValue, inputManualValue, setInputManualValue])
 
   function handleToDecrease(id: number) {
     decreaseQuantity(id)
@@ -23,6 +33,11 @@ export function RowMobile({ itemCart }: CardProps) {
 
   function handleRemoveProduct(id: number) {
     removeProduct(id)
+  }
+
+  function handleUpdateProduct({ quantity }: QuantitySchema) {
+    updateQuantity(itemCart.id, quantity)
+    setInputManualValue(0)
   }
 
   return (
@@ -51,11 +66,14 @@ export function RowMobile({ itemCart }: CardProps) {
               >
                 <PiMinusCircleBold size={18} />
               </button>
-              <form>
+              <form onSubmit={handleSubmit(handleUpdateProduct)}>
                 <input
                   type="number"
-                  {...register('quantity')}
-                  value={itemCart.quantity}
+                  {...register('quantity', { min: 1 })}
+                  onChange={(e) => {
+                    const novaQuantidade = parseInt(e.target.value)
+                    setInputManualValue(novaQuantidade)
+                  }}
                 />
               </form>
               <button onClick={() => handleToIncrease(itemCart.id)}>

@@ -7,6 +7,7 @@ interface CartContextType {
   addToCart: (product: Product) => void
   decreaseQuantity: (id: number) => void
   increaseQuantity: (id: number) => void
+  updateQuantity: (id: number, quantity: number) => void
   removeProduct: (id: number) => void
   finalizeOrder: () => void
 }
@@ -102,6 +103,28 @@ export function CartProvider({ children }: { children: ReactNode }) {
     toast.success(`Você removeu ${productRemoved[0].title} do seu carrinho.`)
   }
 
+  function updateQuantity(id: number, quantity: number) {
+    setCartItems((state) => {
+      const productInCart = state.some((item) => item.id === id)
+
+      if (productInCart) {
+        return state.map((item) => {
+          if (item.id === id) {
+            return {
+              ...item,
+              quantity,
+              subtotal: item.price * quantity,
+            }
+          } else {
+            return item
+          }
+        })
+      }
+
+      return state
+    })
+  }
+
   function finalizeOrder() {
     setCartItems([])
   }
@@ -113,6 +136,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         addToCart,
         decreaseQuantity,
         increaseQuantity,
+        updateQuantity,
         removeProduct,
         finalizeOrder,
       }}
