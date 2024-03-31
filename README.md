@@ -14,3 +14,5 @@ Para referência de layout foi utilizado o seguinte protótipo do figma:
 ### API
 
 Para simular a API, utilizei o json-web server.
+
+obs: criar aquivo .env.local com base no arquivo .env.example
