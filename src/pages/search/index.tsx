@@ -5,6 +5,7 @@ import { SearchForm } from '@/components/search-form'
 import { Loading } from '@/components/spiner'
 import { api } from '@/lib/axios'
 import { useQuery } from '@tanstack/react-query'
+import { Helmet } from 'react-helmet-async'
 import { useSearchParams } from 'react-router-dom'
 import { Container, ProductContainer } from './styles'
 
@@ -40,16 +41,19 @@ export default function Search() {
   })
 
   return (
-    <Container>
-      <SearchForm />
-      {isLoading && <Loading />}
-      <ProductContainer>
-        {data && data?.length > 0
-          ? data.map((product) => {
-              return <ProductCard key={product.id} product={product} />
-            })
-          : !isLoading && <EmptySate />}
-      </ProductContainer>
-    </Container>
+    <>
+      <Helmet title={`Buscando por ${query}`} />
+      <Container>
+        <SearchForm />
+        {isLoading && <Loading />}
+        <ProductContainer>
+          {data && data?.length > 0
+            ? data.map((product) => {
+                return <ProductCard key={product.id} product={product} />
+              })
+            : !isLoading && <EmptySate />}
+        </ProductContainer>
+      </Container>
+    </>
   )
 }
