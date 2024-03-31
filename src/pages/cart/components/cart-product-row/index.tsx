@@ -1,16 +1,16 @@
-import { CartItem } from '@/context/cart-context'
+import { useMediaQuery } from 'react-responsive'
 import { RowDefault } from './row-default'
 import { RowMobile } from './row-mobile'
-
+import { CartItem } from '@/@types/types'
 export interface CardProps {
   itemCart: CartItem
 }
 
 export function CartProductRow({ itemCart }: CardProps) {
-  return (
-    <>
-      <RowDefault itemCart={itemCart} />
-      <RowMobile itemCart={itemCart} />
-    </>
+  const isMobile = useMediaQuery({ maxWidth: 430 })
+  return isMobile ? (
+    <RowMobile itemCart={itemCart} />
+  ) : (
+    <RowDefault itemCart={itemCart} />
   )
 }

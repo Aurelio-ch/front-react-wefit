@@ -1,8 +1,8 @@
-import { Product } from '@/api/get-product'
 import { useCart } from '@/context/cart-context'
 import { MdOutlineAddShoppingCart } from 'react-icons/md'
 import { Button } from '../button'
 import { Container } from './styles'
+import { Product } from '@/@types/types'
 
 interface ProductProps {
   product: {

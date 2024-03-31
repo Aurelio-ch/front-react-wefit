@@ -1,15 +1,6 @@
-import { Product } from '@/api/get-product'
+import { CartItem, Product } from '@/@types/types'
 import { ReactNode, createContext, useContext, useState } from 'react'
 import { toast } from 'sonner'
-
-export interface CartItem {
-  id: number
-  title: string
-  price: number
-  subtotal: number
-  image: string
-  quantity: number
-}
 
 interface CartContextType {
   items: CartItem[]

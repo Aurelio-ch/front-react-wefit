@@ -1,4 +1,4 @@
-import { Product } from '@/api/get-product'
+import { Product } from '@/@types/types'
 import { ProductCard } from '@/components/card'
 import { EmptySate } from '@/components/empty-state'
 import { SearchForm } from '@/components/search-form'
